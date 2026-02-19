@@ -1,0 +1,2 @@
+# ModeloPreentrenadoDjango
+Proyecto educativo
