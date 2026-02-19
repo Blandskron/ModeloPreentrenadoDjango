@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dashboard Crédito</title>
+  <style>
+    body { font-family: Arial, sans-serif; background:#0b1220; color:#e5e7eb; padding:24px; }
+    .card { max-width:560px; margin:0 auto; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); border-radius:14px; padding:18px; }
+    label { display:block; margin:12px 0 6px; color:#cbd5e1; }
+    input { width:100%; padding:12px; border-radius:10px; border:1px solid rgba(255,255,255,.15); background:rgba(0,0,0,.25); color:#fff; }
+    button { margin-top:14px; width:100%; padding:12px; border:0; border-radius:10px; background:#7c3aed; color:#fff; font-weight:700; cursor:pointer; }
+    button:hover { opacity:.95; }
+    .hint { font-size:12px; opacity:.75; margin-top:8px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Validación de solicitud de crédito</h2>
+
+    <form method="POST">
+      {% csrf_token %}
+
+      <label>Nombre del cliente</label>
+      <input name="client_name" type="text" maxlength="120" required placeholder="Ej: Ana Pérez">
+
+      <label>Correo del cliente</label>
+      <input name="client_email" type="email" maxlength="254" required placeholder="Ej: ana@correo.com">
+
+      <label>Ingreso mensual (CLP)</label>
+      <input name="ingreso_mensual" type="number" min="0" step="0.01" required placeholder="Ej: 1200000.50">
+
+      <label>Gastos mensuales (CLP)</label>
+      <input name="gastos_mensuales" type="number" min="0" step="1" required placeholder="Ej: 650000">
+
+      <label>Antigüedad laboral (meses)</label>
+      <input name="antiguedad_laboral_meses" type="number" min="0" step="1" required placeholder="Ej: 18">
+
+      <button type="submit">Evaluar</button>
+    </form>
+
+    <div class="hint">El resultado se calcula localmente en Django usando el modelo entrenado.</div>
+  </div>
+</body>
+</html>

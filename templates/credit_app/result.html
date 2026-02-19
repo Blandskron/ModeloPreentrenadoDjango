@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Resultado</title>
+  <style>
+    body { font-family: Arial, sans-serif; background:#0b1220; color:#e5e7eb; padding:24px; }
+    .wrap { max-width:720px; margin:0 auto; }
+    .card { background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); border-radius:14px; padding:18px; margin-bottom:14px; }
+    .grid { display:grid; grid-template-columns: 1fr 1fr; gap:10px; }
+    .pill { display:inline-block; padding:6px 10px; border-radius:999px; background:rgba(124,58,237,.18); border:1px solid rgba(124,58,237,.35); }
+    a { color:#a78bfa; text-decoration:none; }
+    a:hover { text-decoration:underline; }
+    table { width:100%; border-collapse:collapse; }
+    td { padding:8px; border-bottom:1px solid rgba(255,255,255,.10); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div>Nombre: <b>{{ input.client_name }}</b></div>
+      <div>Correo: <b>{{ input.client_email }}</b></div>
+      <h2>Resultado</h2>
+      <div class="pill">{{ result.decision.status }}</div>
+      <p>Monto máximo sugerido: <b>{{ result.decision.monto_maximo }}</b> CLP</p>
+    </div>
+
+    <div class="card">
+      <h3>Datos de entrada</h3>
+      <div class="grid">
+        <div>Ingreso mensual: <b>{{ input.ingreso_mensual }}</b></div>
+        <div>Gastos mensuales: <b>{{ input.gastos_mensuales }}</b></div>
+        <div>Antigüedad (meses): <b>{{ input.antiguedad_laboral_meses }}</b></div>
+        <div>Label: <b>{{ result.label }}</b></div>
+      </div>
+    </div>
+
+    {% if result.proba %}
+    <div class="card">
+      <h3>Probabilidades</h3>
+      <table>
+        <tr><td>Clase 0 (No cumple)</td><td>{{ result.proba.0 }}</td></tr>
+        <tr><td>Clase 1 (Parcial)</td><td>{{ result.proba.1 }}</td></tr>
+        <tr><td>Clase 2 (Alto)</td><td>{{ result.proba.2 }}</td></tr>
+      </table>
+    </div>
+    {% endif %}
+
+    <div class="card">
+      <a href="/">← Volver al dashboard</a>
+    </div>
+  </div>
+</body>
+</html>
